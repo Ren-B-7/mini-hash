@@ -1,0 +1,4 @@
+
+Checks: '-*,bugprone-*,clang-analyzer-*,readability-*,performance-*,-clang-analyzer-security.insecureAPI.DeprecatedOrUnsafeBufferHandling'
+WarningsAsErrors: '-*,bugprone-*,clang-analyzer-*,readability-*,performance-*,-clang-analyzer-security.insecureAPI.DeprecatedOrUnsafeBufferHandling'
+
