@@ -1,0 +1,723 @@
+Running clang-tidy analysis
+clang-tidy -checks=-*,bugprone-*,clang-analyzer-*,performance-* \
+src/cli.c src/fileutils.c src/hashing.c src/main.c src/set.c src/include/cli.h src/include/fileutils.h src/include/hashing.h src/include/minicli.h src/include/set.h -- -std=c99 -D_POSIX_C_SOURCE=200809L -D_DEFAULT_SOURCE -pedantic -pedantic-errors -Wall -Wextra -Wformat=2 -Wformat-security -Wnull-dereference -Isrc -Isrc/include   -Wstack-protector -Wtrampolines -Walloca -Wvla -Warray-bounds=2 -Wimplicit-fallthrough=3 -Wshift-overflow=2 -Wcast-qual -Wcast-align=strict -Wconversion -Wsign-conversion -Wlogical-op -Wduplicated-cond -Wduplicated-branches -Wrestrict -Wnested-externs -Winline -Wundef -Wstrict-prototypes -Wmissing-prototypes -Wmissing-declarations -Wredundant-decls -Wshadow -Wwrite-strings -Wfloat-equal -Wpointer-arith -Wbad-function-cast -Wold-style-definition
+/home/renier/Projects/mini-hash/src/cli.c:103:7: warning: Out of bound access to memory after the end of the heap area [clang-analyzer-security.ArrayBound]
+  103 |                                                 inputs[idx++] = argv[i];
+      |                                                 ^~~~~~~~~~~~~
+/home/renier/Projects/mini-hash/src/cli.c:89:6: note: Assuming 'first_non_option' is < 'argc'
+   89 |         if (first_non_option < argc) {
+      |             ^~~~~~~~~~~~~~~~~~~~~~~
+/home/renier/Projects/mini-hash/src/cli.c:89:2: note: Taking true branch
+   89 |         if (first_non_option < argc) {
+      |         ^
+/home/renier/Projects/mini-hash/src/cli.c:91:34: note: 'i' is < 'argc'
+   91 |                 for (int i = first_non_option; i < argc; i++) {
+      |                                                ^
+/home/renier/Projects/mini-hash/src/cli.c:91:3: note: Loop condition is true.  Entering loop body
+   91 |                 for (int i = first_non_option; i < argc; i++) {
+      |                 ^
+/home/renier/Projects/mini-hash/src/cli.c:92:8: note: Assuming the condition is false
+   92 |                         if (argv[i][0] != '-' || strcmp(argv[i], "-") == 0) {
+      |                             ^~~~~~~~~~~~~~~~~
+/home/renier/Projects/mini-hash/src/cli.c:92:8: note: Left side of '||' is false
+/home/renier/Projects/mini-hash/src/cli.c:92:29: note: Assuming the condition is false
+   92 |                         if (argv[i][0] != '-' || strcmp(argv[i], "-") == 0) {
+      |                                                  ^~~~~~~~~~~~~~~~~~~~~~~~~
+/home/renier/Projects/mini-hash/src/cli.c:92:4: note: Taking false branch
+   92 |                         if (argv[i][0] != '-' || strcmp(argv[i], "-") == 0) {
+      |                         ^
+/home/renier/Projects/mini-hash/src/cli.c:91:34: note: Assuming 'i' is < 'argc'
+   91 |                 for (int i = first_non_option; i < argc; i++) {
+      |                                                ^~~~~~~~
+/home/renier/Projects/mini-hash/src/cli.c:91:3: note: Loop condition is true.  Entering loop body
+   91 |                 for (int i = first_non_option; i < argc; i++) {
+      |                 ^
+/home/renier/Projects/mini-hash/src/cli.c:92:8: note: Assuming the condition is true
+   92 |                         if (argv[i][0] != '-' || strcmp(argv[i], "-") == 0) {
+      |                             ^~~~~~~~~~~~~~~~~
+/home/renier/Projects/mini-hash/src/cli.c:92:26: note: Left side of '||' is true
+   92 |                         if (argv[i][0] != '-' || strcmp(argv[i], "-") == 0) {
+      |                                               ^
+/home/renier/Projects/mini-hash/src/cli.c:91:34: note: Assuming 'i' is >= 'argc'
+   91 |                 for (int i = first_non_option; i < argc; i++) {
+      |                                                ^~~~~~~~
+/home/renier/Projects/mini-hash/src/cli.c:91:3: note: Loop condition is false. Execution continues on line 97
+   91 |                 for (int i = first_non_option; i < argc; i++) {
+      |                 ^
+/home/renier/Projects/mini-hash/src/cli.c:97:7: note: 'count' is > 0
+   97 |                 if (count > 0) {
+      |                     ^~~~~
+/home/renier/Projects/mini-hash/src/cli.c:97:3: note: Taking true branch
+   97 |                 if (count > 0) {
+      |                 ^
+/home/renier/Projects/mini-hash/src/cli.c:99:8: note: Assuming 'inputs' is non-null
+   99 |                         if (inputs) {
+      |                             ^~~~~~
+/home/renier/Projects/mini-hash/src/cli.c:99:4: note: Taking true branch
+   99 |                         if (inputs) {
+      |                         ^
+/home/renier/Projects/mini-hash/src/cli.c:101:36: note: 'i' is < 'argc'
+  101 |                                 for (int i = first_non_option; i < argc; i++) {
+      |                                                                ^
+/home/renier/Projects/mini-hash/src/cli.c:101:5: note: Loop condition is true.  Entering loop body
+  101 |                                 for (int i = first_non_option; i < argc; i++) {
+      |                                 ^
+/home/renier/Projects/mini-hash/src/cli.c:102:10: note: Assuming the condition is true
+  102 |                                         if (argv[i][0] != '-' || strcmp(argv[i], "-") == 0) {
+      |                                             ^~~~~~~~~~~~~~~~~
+/home/renier/Projects/mini-hash/src/cli.c:102:28: note: Left side of '||' is true
+  102 |                                         if (argv[i][0] != '-' || strcmp(argv[i], "-") == 0) {
+      |                                                               ^
+/home/renier/Projects/mini-hash/src/cli.c:101:36: note: 'i' is < 'argc'
+  101 |                                 for (int i = first_non_option; i < argc; i++) {
+      |                                                                ^
+/home/renier/Projects/mini-hash/src/cli.c:101:5: note: Loop condition is true.  Entering loop body
+  101 |                                 for (int i = first_non_option; i < argc; i++) {
+      |                                 ^
+/home/renier/Projects/mini-hash/src/cli.c:102:10: note: Assuming the condition is true
+  102 |                                         if (argv[i][0] != '-' || strcmp(argv[i], "-") == 0) {
+      |                                             ^~~~~~~~~~~~~~~~~
+/home/renier/Projects/mini-hash/src/cli.c:102:28: note: Left side of '||' is true
+  102 |                                         if (argv[i][0] != '-' || strcmp(argv[i], "-") == 0) {
+      |                                                               ^
+/home/renier/Projects/mini-hash/src/cli.c:103:7: note: Access of the heap area at index 1, while it holds only a single 'const char *' element
+  103 |                                                 inputs[idx++] = argv[i];
+      |                                                 ^~~~~~~~~~~~~
+/home/renier/Projects/mini-hash/src/fileutils.c:91:3: warning: declaration uses identifier '__file_struct', which is a reserved identifier [bugprone-reserved-identifier]
+   91 | } __file_struct;
+      |   ^~~~~~~~~~~~~
+      |   file_struct
+/home/renier/Projects/mini-hash/src/fileutils.c:104:3: warning: declaration uses identifier '__dir_struct', which is a reserved identifier [bugprone-reserved-identifier]
+  104 | } __dir_struct;
+      |   ^~~~~~~~~~~~
+      |   dir_struct
+/home/renier/Projects/mini-hash/src/fileutils.c:107:14: warning: declaration uses identifier '__str_duplicate', which is a reserved identifier [bugprone-reserved-identifier]
+  107 | static char* __str_duplicate(const char* s);
+      |              ^~~~~~~~~~~~~~~
+      |              str_duplicate
+/home/renier/Projects/mini-hash/src/fileutils.c:109:1: warning: declaration uses identifier '__str_extract_substring', which is a reserved identifier [bugprone-reserved-identifier]
+  109 | __str_extract_substring(const char* s, size_t start, size_t length);
+      | ^~~~~~~~~~~~~~~~~~~~~~~
+      | str_extract_substring
+/home/renier/Projects/mini-hash/src/fileutils.c:110:12: warning: declaration uses identifier '__str_find_reverse', which is a reserved identifier [bugprone-reserved-identifier]
+  110 | static int __str_find_reverse(const char* s, const char c);
+      |            ^~~~~~~~~~~~~~~~~~
+      |            str_find_reverse
+/home/renier/Projects/mini-hash/src/fileutils.c:111:15: warning: declaration uses identifier '__str_split_string_any', which is a reserved identifier [bugprone-reserved-identifier]
+  111 | static char** __str_split_string_any(char* s, const char* s2, size_t* num);
+      |               ^~~~~~~~~~~~~~~~~~~~~~
+      |               str_split_string_any
+/home/renier/Projects/mini-hash/src/fileutils.c:112:12: warning: declaration uses identifier '__str_find_any', which is a reserved identifier [bugprone-reserved-identifier]
+  112 | static int __str_find_any(const char* s, const char* s2);
+      |            ^~~~~~~~~~~~~~
+      |            str_find_any
+/home/renier/Projects/mini-hash/src/fileutils.c:113:15: warning: declaration uses identifier '__str_find_cnt_any', which is a reserved identifier [bugprone-reserved-identifier]
+  113 | static size_t __str_find_cnt_any(const char* s, const char* s2);
+      |               ^~~~~~~~~~~~~~~~~~
+      |               str_find_cnt_any
+/home/renier/Projects/mini-hash/src/fileutils.c:115:1: warning: declaration uses identifier '__parse_file_info', which is a reserved identifier [bugprone-reserved-identifier]
+  115 | __parse_file_info(const char* full_filepath, char** filepath, char** filename);
+      | ^~~~~~~~~~~~~~~~~
+      | parse_file_info
+/home/renier/Projects/mini-hash/src/fileutils.c:116:13: warning: declaration uses identifier '__free_double_array', which is a reserved identifier [bugprone-reserved-identifier]
+  116 | static void __free_double_array(char** arr, size_t num_elms);
+      |             ^~~~~~~~~~~~~~~~~~~
+      |             free_double_array
+/home/renier/Projects/mini-hash/src/fileutils.c:117:12: warning: declaration uses identifier '__cmp_str', which is a reserved identifier [bugprone-reserved-identifier]
+  117 | static int __cmp_str(const void* a, const void* b);
+      |            ^~~~~~~~~
+      |            cmp_str
+/home/renier/Projects/mini-hash/src/fileutils.c:118:14: warning: declaration uses identifier '__clean_path', which is a reserved identifier [bugprone-reserved-identifier]
+  118 | static char* __clean_path(const char* path);
+      |              ^~~~~~~~~~~~
+      |              clean_path
+  119 | /* wrapper functions for windows and posix systems support */
+  120 | static int __fs_mkdir(const char* path, mode_t mode);
+  121 | static int __fs_rmdir(const char* path);
+  122 | static char** __fs_list_dir(const char* path, int* elms);
+  123 | 
+  124 | int fs_identify_path(const char* path)
+  125 | {
+  126 |         if (path == NULL) {
+  127 |                 return FS_NOT_VALID;
+  128 |         }
+  129 | 
+  130 |         // Handle trailing path separators by creating a copy without them
+  131 |         char* clean_path = __clean_path(path);
+      |                            ~~~~~~~~~~~~
+      |                            clean_path
+/home/renier/Projects/mini-hash/src/fileutils.c:120:12: warning: declaration uses identifier '__fs_mkdir', which is a reserved identifier [bugprone-reserved-identifier]
+  120 | static int __fs_mkdir(const char* path, mode_t mode);
+      |            ^~~~~~~~~~
+      |            fs_mkdir
+/home/renier/Projects/mini-hash/src/fileutils.c:121:12: warning: declaration uses identifier '__fs_rmdir', which is a reserved identifier [bugprone-reserved-identifier]
+  121 | static int __fs_rmdir(const char* path);
+      |            ^~~~~~~~~~
+      |            fs_rmdir
+/home/renier/Projects/mini-hash/src/fileutils.c:122:15: warning: declaration uses identifier '__fs_list_dir', which is a reserved identifier [bugprone-reserved-identifier]
+  122 | static char** __fs_list_dir(const char* path, int* elms);
+      |               ^~~~~~~~~~~~~
+      |               fs_list_dir
+/home/renier/Projects/mini-hash/src/fileutils.c:271:10: warning: Call to function 'strcpy' is insecure as it does not provide bounding of the memory buffer. Replace unbounded copy functions with analogous functions that support length arguments such as 'strlcpy'. CWE-119 [clang-analyzer-security.insecureAPI.strcpy]
+  271 |                 return strcpy(res, filename);
+      |                        ^~~~~~
+/home/renier/Projects/mini-hash/src/fileutils.c:271:10: note: Call to function 'strcpy' is insecure as it does not provide bounding of the memory buffer. Replace unbounded copy functions with analogous functions that support length arguments such as 'strlcpy'. CWE-119
+  271 |                 return strcpy(res, filename);
+      |                        ^~~~~~
+/home/renier/Projects/mini-hash/src/fileutils.c:276:10: warning: Call to function 'strcpy' is insecure as it does not provide bounding of the memory buffer. Replace unbounded copy functions with analogous functions that support length arguments such as 'strlcpy'. CWE-119 [clang-analyzer-security.insecureAPI.strcpy]
+  276 |                 return strcpy(res, path);
+      |                        ^~~~~~
+/home/renier/Projects/mini-hash/src/fileutils.c:276:10: note: Call to function 'strcpy' is insecure as it does not provide bounding of the memory buffer. Replace unbounded copy functions with analogous functions that support length arguments such as 'strlcpy'. CWE-119
+  276 |                 return strcpy(res, path);
+      |                        ^~~~~~
+/home/renier/Projects/mini-hash/src/fileutils.c:297:2: warning: Call to function 'strcpy' is insecure as it does not provide bounding of the memory buffer. Replace unbounded copy functions with analogous functions that support length arguments such as 'strlcpy'. CWE-119 [clang-analyzer-security.insecureAPI.strcpy]
+  297 |         strcpy(res, path);
+      |         ^~~~~~
+/home/renier/Projects/mini-hash/src/fileutils.c:297:2: note: Call to function 'strcpy' is insecure as it does not provide bounding of the memory buffer. Replace unbounded copy functions with analogous functions that support length arguments such as 'strlcpy'. CWE-119
+  297 |         strcpy(res, path);
+      |         ^~~~~~
+/home/renier/Projects/mini-hash/src/fileutils.c:302:2: warning: Call to function 'strcpy' is insecure as it does not provide bounding of the memory buffer. Replace unbounded copy functions with analogous functions that support length arguments such as 'strlcpy'. CWE-119 [clang-analyzer-security.insecureAPI.strcpy]
+  302 |         strcpy(res + 1 + p_len, filename);
+      |         ^~~~~~
+/home/renier/Projects/mini-hash/src/fileutils.c:302:2: note: Call to function 'strcpy' is insecure as it does not provide bounding of the memory buffer. Replace unbounded copy functions with analogous functions that support length arguments such as 'strlcpy'. CWE-119
+  302 |         strcpy(res + 1 + p_len, filename);
+      |         ^~~~~~
+/home/renier/Projects/mini-hash/src/fileutils.c:358:11: warning: an assignment within an 'if' condition is bug-prone [bugprone-assignment-in-if-condition]
+  358 |         if ((pfd = open(path, O_CREAT, mode)) == -1) {
+      |              ~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/renier/Projects/mini-hash/src/fileutils.c:358:11: note: if it should be an assignment, move it out of the 'if' condition
+/home/renier/Projects/mini-hash/src/fileutils.c:358:11: note: if it is meant to be an equality check, change '=' to '=='
+/home/renier/Projects/mini-hash/src/fileutils.c:634:16: warning: The 1st argument to 'realpath' is NULL but should not be NULL [clang-analyzer-unix.StdCLibraryFunctions]
+  634 |         f->basepath = realpath(path, NULL);
+      |                       ^        ~~~~
+/home/renier/Projects/mini-hash/src/fileutils.c:607:2: note: Taking false branch
+  607 |         if (stat(filepath, &stats) == -1) {
+      |         ^
+/home/renier/Projects/mini-hash/src/fileutils.c:613:6: note: Assuming the condition is true
+  613 |         if (S_ISREG(mode) == 0) {
+      |             ^
+/usr/include/sys/stat.h:128:24: note: expanded from macro 'S_ISREG'
+  128 | #define S_ISREG(mode)    __S_ISTYPE((mode), __S_IFREG)
+      |                          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/usr/include/sys/stat.h:123:33: note: expanded from macro '__S_ISTYPE'
+  123 | #define __S_ISTYPE(mode, mask)  (((mode) & __S_IFMT) == (mask))
+      |                                  ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/renier/Projects/mini-hash/src/fileutils.c:613:2: note: Taking false branch
+  613 |         if (S_ISREG(mode) == 0) {
+      |         ^
+/home/renier/Projects/mini-hash/src/fileutils.c:618:6: note: Assuming 'f' is not equal to NULL
+  618 |         if (f == NULL) {
+      |             ^~~~~~~~~
+/home/renier/Projects/mini-hash/src/fileutils.c:618:2: note: Taking false branch
+  618 |         if (f == NULL) {
+      |         ^
+/home/renier/Projects/mini-hash/src/fileutils.c:630:18: note: '?' condition is false
+  630 |         f->is_symlink = fs_is_symlink(filepath) == FS_SUCCESS ? true : false;
+      |                         ^
+/home/renier/Projects/mini-hash/src/fileutils.c:633:2: note: Calling '__parse_file_info'
+  633 |         __parse_file_info(filepath, &path, &f->filename);
+      |         ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/renier/Projects/mini-hash/src/fileutils.c:1216:6: note: 'full_filepath' is not equal to NULL
+ 1216 |         if (full_filepath == NULL || strlen(full_filepath) == 0) {
+      |             ^~~~~~~~~~~~~
+/home/renier/Projects/mini-hash/src/fileutils.c:1216:6: note: Left side of '||' is false
+/home/renier/Projects/mini-hash/src/fileutils.c:1216:31: note: Assuming the condition is true
+ 1216 |         if (full_filepath == NULL || strlen(full_filepath) == 0) {
+      |                                      ^~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/renier/Projects/mini-hash/src/fileutils.c:1216:2: note: Taking true branch
+ 1216 |         if (full_filepath == NULL || strlen(full_filepath) == 0) {
+      |         ^
+/home/renier/Projects/mini-hash/src/fileutils.c:1217:3: note: Null pointer value stored to 'path'
+ 1217 |                 (*filepath) = NULL;
+      |                 ^~~~~~~~~~~~~~~~~~
+/home/renier/Projects/mini-hash/src/fileutils.c:633:2: note: Returning from '__parse_file_info'
+  633 |         __parse_file_info(filepath, &path, &f->filename);
+      |         ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/renier/Projects/mini-hash/src/fileutils.c:634:16: note: The 1st argument to 'realpath' is NULL but should not be NULL
+  634 |         f->basepath = realpath(path, NULL);
+      |                       ^        ~~~~
+/home/renier/Projects/mini-hash/src/fileutils.c:640:41: warning: either cast from 'int' to 'size_t' (aka 'unsigned long') is ineffective, or there is loss of precision before the conversion [bugprone-misplaced-widening-cast]
+  640 |                  __str_extract_substring(f->filename, (size_t)(ex_pos + 1), strlen(f->filename));
+      |                                                       ^
+/home/renier/Projects/mini-hash/src/fileutils.c:656:7: warning: multilevel pointer conversion from 'char **' to 'void *', please use explicit cast [bugprone-multi-level-implicit-pointer-conversion]
+  656 |         free(f->lines);
+      |              ^
+/home/renier/Projects/mini-hash/src/fileutils.c:736:2: warning: Call to function 'strcpy' is insecure as it does not provide bounding of the memory buffer. Replace unbounded copy functions with analogous functions that support length arguments such as 'strlcpy'. CWE-119 [clang-analyzer-security.insecureAPI.strcpy]
+  736 |         strcpy(full_path, f->basepath);
+      |         ^~~~~~
+/home/renier/Projects/mini-hash/src/fileutils.c:736:2: note: Call to function 'strcpy' is insecure as it does not provide bounding of the memory buffer. Replace unbounded copy functions with analogous functions that support length arguments such as 'strlcpy'. CWE-119
+  736 |         strcpy(full_path, f->basepath);
+      |         ^~~~~~
+/home/renier/Projects/mini-hash/src/fileutils.c:738:2: warning: Call to function 'strcpy' is insecure as it does not provide bounding of the memory buffer. Replace unbounded copy functions with analogous functions that support length arguments such as 'strlcpy'. CWE-119 [clang-analyzer-security.insecureAPI.strcpy]
+  738 |         strcpy(full_path + blen + 1, f->filename);
+      |         ^~~~~~
+/home/renier/Projects/mini-hash/src/fileutils.c:738:2: note: Call to function 'strcpy' is insecure as it does not provide bounding of the memory buffer. Replace unbounded copy functions with analogous functions that support length arguments such as 'strlcpy'. CWE-119
+  738 |         strcpy(full_path + blen + 1, f->filename);
+      |         ^~~~~~
+/home/renier/Projects/mini-hash/src/fileutils.c:816:7: warning: multilevel pointer conversion from 'char **' to 'void *', please use explicit cast [bugprone-multi-level-implicit-pointer-conversion]
+  816 |         free(d->subdirs);
+      |              ^
+/home/renier/Projects/mini-hash/src/fileutils.c:821:7: warning: multilevel pointer conversion from 'char **' to 'void *', please use explicit cast [bugprone-multi-level-implicit-pointer-conversion]
+  821 |         free(d->subdirs_fullpath);
+      |              ^
+/home/renier/Projects/mini-hash/src/fileutils.c:826:7: warning: multilevel pointer conversion from 'char **' to 'void *', please use explicit cast [bugprone-multi-level-implicit-pointer-conversion]
+  826 |         free(d->subfiles);
+      |              ^
+/home/renier/Projects/mini-hash/src/fileutils.c:831:7: warning: multilevel pointer conversion from 'char **' to 'void *', please use explicit cast [bugprone-multi-level-implicit-pointer-conversion]
+  831 |         free(d->subfiles_fullpath);
+      |              ^
+/home/renier/Projects/mini-hash/src/fileutils.c:875:7: warning: multilevel pointer conversion from 'char **' to 'void *', please use explicit cast [bugprone-multi-level-implicit-pointer-conversion]
+  875 |         free(d->subdirs);
+      |              ^
+/home/renier/Projects/mini-hash/src/fileutils.c:876:7: warning: multilevel pointer conversion from 'char **' to 'void *', please use explicit cast [bugprone-multi-level-implicit-pointer-conversion]
+  876 |         free(d->subdirs_fullpath);
+      |              ^
+/home/renier/Projects/mini-hash/src/fileutils.c:877:7: warning: multilevel pointer conversion from 'char **' to 'void *', please use explicit cast [bugprone-multi-level-implicit-pointer-conversion]
+  877 |         free(d->subfiles);
+      |              ^
+/home/renier/Projects/mini-hash/src/fileutils.c:878:7: warning: multilevel pointer conversion from 'char **' to 'void *', please use explicit cast [bugprone-multi-level-implicit-pointer-conversion]
+  878 |         free(d->subfiles_fullpath);
+      |              ^
+/home/renier/Projects/mini-hash/src/fileutils.c:896:8: warning: multilevel pointer conversion from 'char **' to 'void *', please use explicit cast [bugprone-multi-level-implicit-pointer-conversion]
+  896 |                 free(d->subitems_fullpath);
+      |                      ^
+/home/renier/Projects/mini-hash/src/fileutils.c:897:8: warning: multilevel pointer conversion from 'char **' to 'void *', please use explicit cast [bugprone-multi-level-implicit-pointer-conversion]
+  897 |                 free(d->subfiles);
+      |                      ^
+/home/renier/Projects/mini-hash/src/fileutils.c:898:8: warning: multilevel pointer conversion from 'char **' to 'void *', please use explicit cast [bugprone-multi-level-implicit-pointer-conversion]
+  898 |                 free(d->subfiles_fullpath);
+      |                      ^
+/home/renier/Projects/mini-hash/src/fileutils.c:899:8: warning: multilevel pointer conversion from 'char **' to 'void *', please use explicit cast [bugprone-multi-level-implicit-pointer-conversion]
+  899 |                 free(d->subdirs);
+      |                      ^
+/home/renier/Projects/mini-hash/src/fileutils.c:900:8: warning: multilevel pointer conversion from 'char **' to 'void *', please use explicit cast [bugprone-multi-level-implicit-pointer-conversion]
+  900 |                 free(d->subdirs_fullpath);
+      |                      ^
+/home/renier/Projects/mini-hash/src/fileutils.c:927:22: warning: Call to 'realloc' has an allocation size of 0 bytes [clang-analyzer-optin.portability.UnixAPI]
+  927 |         char** t = (char**) realloc(d->subdirs, sizeof(char*) * (size_t)(d->num_subdirs));
+      |                             ^
+/home/renier/Projects/mini-hash/src/fileutils.c:782:2: note: Taking false branch
+  782 |         if (fs_identify_path(path) != FS_DIRECTORY) {
+      |         ^
+/home/renier/Projects/mini-hash/src/fileutils.c:787:6: note: Assuming 'd' is not equal to NULL
+  787 |         if (d == NULL) {
+      |             ^~~~~~~~~
+/home/renier/Projects/mini-hash/src/fileutils.c:787:2: note: Taking false branch
+  787 |         if (d == NULL) {
+      |         ^
+/home/renier/Projects/mini-hash/src/fileutils.c:801:2: note: Calling 'd_update_list'
+  801 |         d_update_list(d);
+      |         ^~~~~~~~~~~~~~~~
+/home/renier/Projects/mini-hash/src/fileutils.c:867:6: note: Assuming 'new_ls' is not equal to NULL
+  867 |         if (new_ls == NULL) {
+      |             ^~~~~~~~~~~~~~
+/home/renier/Projects/mini-hash/src/fileutils.c:867:2: note: Taking false branch
+  867 |         if (new_ls == NULL) {
+      |         ^
+/home/renier/Projects/mini-hash/src/fileutils.c:884:2: note: The value 0 is assigned to field 'num_subdirs'
+  884 |         d->num_subdirs = 0;
+      |         ^~~~~~~~~~~~~~~~~~
+/home/renier/Projects/mini-hash/src/fileutils.c:892:6: note: Assuming field 'subitems_fullpath' is not equal to NULL
+  892 |         if (d->subitems_fullpath == NULL || d->subfiles == NULL ||
+      |             ^~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/renier/Projects/mini-hash/src/fileutils.c:892:6: note: Left side of '||' is false
+/home/renier/Projects/mini-hash/src/fileutils.c:892:38: note: Assuming field 'subfiles' is not equal to NULL
+  892 |         if (d->subitems_fullpath == NULL || d->subfiles == NULL ||
+      |                                             ^~~~~~~~~~~~~~~~~~~
+/home/renier/Projects/mini-hash/src/fileutils.c:892:6: note: Left side of '||' is false
+  892 |         if (d->subitems_fullpath == NULL || d->subfiles == NULL ||
+      |             ^
+/home/renier/Projects/mini-hash/src/fileutils.c:893:3: note: Assuming field 'subfiles_fullpath' is not equal to NULL
+  893 |          d->subfiles_fullpath == NULL || d->subdirs == NULL ||
+      |          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/renier/Projects/mini-hash/src/fileutils.c:892:6: note: Left side of '||' is false
+  892 |         if (d->subitems_fullpath == NULL || d->subfiles == NULL ||
+      |             ^
+/home/renier/Projects/mini-hash/src/fileutils.c:893:35: note: Assuming field 'subdirs' is not equal to NULL
+  893 |          d->subfiles_fullpath == NULL || d->subdirs == NULL ||
+      |                                          ^~~~~~~~~~~~~~~~~~
+/home/renier/Projects/mini-hash/src/fileutils.c:892:6: note: Left side of '||' is false
+  892 |         if (d->subitems_fullpath == NULL || d->subfiles == NULL ||
+      |             ^
+/home/renier/Projects/mini-hash/src/fileutils.c:894:3: note: Assuming field 'subdirs_fullpath' is not equal to NULL
+  894 |          d->subdirs_fullpath == NULL) {
+      |          ^~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/renier/Projects/mini-hash/src/fileutils.c:892:2: note: Taking false branch
+  892 |         if (d->subitems_fullpath == NULL || d->subfiles == NULL ||
+      |         ^
+/home/renier/Projects/mini-hash/src/fileutils.c:910:14: note: Assuming 'i' is >= field 'num_subitems'
+  910 |         for (i = 0; i < d->num_subitems; ++i) {
+      |                     ^~~~~~~~~~~~~~~~~~~
+/home/renier/Projects/mini-hash/src/fileutils.c:910:2: note: Loop condition is false. Execution continues on line 927
+  910 |         for (i = 0; i < d->num_subitems; ++i) {
+      |         ^
+/home/renier/Projects/mini-hash/src/fileutils.c:927:22: note: Call to 'realloc' has an allocation size of 0 bytes
+  927 |         char** t = (char**) realloc(d->subdirs, sizeof(char*) * (size_t)(d->num_subdirs));
+      |                             ^                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/renier/Projects/mini-hash/src/fileutils.c:927:30: warning: multilevel pointer conversion from 'char **' to 'void *', please use explicit cast [bugprone-multi-level-implicit-pointer-conversion]
+  927 |         char** t = (char**) realloc(d->subdirs, sizeof(char*) * (size_t)(d->num_subdirs));
+      |                                     ^
+/home/renier/Projects/mini-hash/src/fileutils.c:934:20: warning: multilevel pointer conversion from 'char **' to 'void *', please use explicit cast [bugprone-multi-level-implicit-pointer-conversion]
+  934 |          (char**) realloc(d->subdirs_fullpath, sizeof(char*) * (size_t)(d->num_subdirs));
+      |                           ^
+/home/renier/Projects/mini-hash/src/fileutils.c:940:22: warning: Call to 'realloc' has an allocation size of 0 bytes [clang-analyzer-optin.portability.UnixAPI]
+  940 |         char** s = (char**) realloc(d->subfiles, sizeof(char*) * (size_t)(d->num_subfiles));
+      |                             ^
+/home/renier/Projects/mini-hash/src/fileutils.c:782:2: note: Taking false branch
+  782 |         if (fs_identify_path(path) != FS_DIRECTORY) {
+      |         ^
+/home/renier/Projects/mini-hash/src/fileutils.c:787:6: note: Assuming 'd' is not equal to NULL
+  787 |         if (d == NULL) {
+      |             ^~~~~~~~~
+/home/renier/Projects/mini-hash/src/fileutils.c:787:2: note: Taking false branch
+  787 |         if (d == NULL) {
+      |         ^
+/home/renier/Projects/mini-hash/src/fileutils.c:801:2: note: Calling 'd_update_list'
+  801 |         d_update_list(d);
+      |         ^~~~~~~~~~~~~~~~
+/home/renier/Projects/mini-hash/src/fileutils.c:867:6: note: Assuming 'new_ls' is not equal to NULL
+  867 |         if (new_ls == NULL) {
+      |             ^~~~~~~~~~~~~~
+/home/renier/Projects/mini-hash/src/fileutils.c:867:2: note: Taking false branch
+  867 |         if (new_ls == NULL) {
+      |         ^
+/home/renier/Projects/mini-hash/src/fileutils.c:885:2: note: The value 0 is assigned to field 'num_subfiles'
+  885 |         d->num_subfiles = 0;
+      |         ^~~~~~~~~~~~~~~~~~~
+/home/renier/Projects/mini-hash/src/fileutils.c:892:6: note: Assuming field 'subitems_fullpath' is not equal to NULL
+  892 |         if (d->subitems_fullpath == NULL || d->subfiles == NULL ||
+      |             ^~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/renier/Projects/mini-hash/src/fileutils.c:892:6: note: Left side of '||' is false
+/home/renier/Projects/mini-hash/src/fileutils.c:892:38: note: Assuming field 'subfiles' is not equal to NULL
+  892 |         if (d->subitems_fullpath == NULL || d->subfiles == NULL ||
+      |                                             ^~~~~~~~~~~~~~~~~~~
+/home/renier/Projects/mini-hash/src/fileutils.c:892:6: note: Left side of '||' is false
+  892 |         if (d->subitems_fullpath == NULL || d->subfiles == NULL ||
+      |             ^
+/home/renier/Projects/mini-hash/src/fileutils.c:893:3: note: Assuming field 'subfiles_fullpath' is not equal to NULL
+  893 |          d->subfiles_fullpath == NULL || d->subdirs == NULL ||
+      |          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/renier/Projects/mini-hash/src/fileutils.c:892:6: note: Left side of '||' is false
+  892 |         if (d->subitems_fullpath == NULL || d->subfiles == NULL ||
+      |             ^
+/home/renier/Projects/mini-hash/src/fileutils.c:893:35: note: Assuming field 'subdirs' is not equal to NULL
+  893 |          d->subfiles_fullpath == NULL || d->subdirs == NULL ||
+      |                                          ^~~~~~~~~~~~~~~~~~
+/home/renier/Projects/mini-hash/src/fileutils.c:892:6: note: Left side of '||' is false
+  892 |         if (d->subitems_fullpath == NULL || d->subfiles == NULL ||
+      |             ^
+/home/renier/Projects/mini-hash/src/fileutils.c:894:3: note: Assuming field 'subdirs_fullpath' is not equal to NULL
+  894 |          d->subdirs_fullpath == NULL) {
+      |          ^~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/renier/Projects/mini-hash/src/fileutils.c:892:2: note: Taking false branch
+  892 |         if (d->subitems_fullpath == NULL || d->subfiles == NULL ||
+      |         ^
+/home/renier/Projects/mini-hash/src/fileutils.c:910:14: note: Assuming 'i' is < field 'num_subitems'
+  910 |         for (i = 0; i < d->num_subitems; ++i) {
+      |                     ^~~~~~~~~~~~~~~~~~~
+/home/renier/Projects/mini-hash/src/fileutils.c:910:2: note: Loop condition is true.  Entering loop body
+  910 |         for (i = 0; i < d->num_subitems; ++i) {
+      |         ^
+/home/renier/Projects/mini-hash/src/fileutils.c:913:7: note: Assuming the condition is true
+  913 |                 if (fs_identify_path(full_path) == FS_DIRECTORY) {
+      |                     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/renier/Projects/mini-hash/src/fileutils.c:913:3: note: Taking true branch
+  913 |                 if (fs_identify_path(full_path) == FS_DIRECTORY) {
+      |                 ^
+/home/renier/Projects/mini-hash/src/fileutils.c:910:14: note: Assuming 'i' is >= field 'num_subitems'
+  910 |         for (i = 0; i < d->num_subitems; ++i) {
+      |                     ^~~~~~~~~~~~~~~~~~~
+/home/renier/Projects/mini-hash/src/fileutils.c:910:2: note: Loop condition is false. Execution continues on line 927
+  910 |         for (i = 0; i < d->num_subitems; ++i) {
+      |         ^
+/home/renier/Projects/mini-hash/src/fileutils.c:928:6: note: Assuming 't' is not equal to NULL
+  928 |         if (t == NULL) {
+      |             ^~~~~~~~~
+/home/renier/Projects/mini-hash/src/fileutils.c:928:2: note: Taking false branch
+  928 |         if (t == NULL) {
+      |         ^
+/home/renier/Projects/mini-hash/src/fileutils.c:935:6: note: Assuming 'q' is not equal to NULL
+  935 |         if (q == NULL) {
+      |             ^~~~~~~~~
+/home/renier/Projects/mini-hash/src/fileutils.c:935:2: note: Taking false branch
+  935 |         if (q == NULL) {
+      |         ^
+/home/renier/Projects/mini-hash/src/fileutils.c:940:22: note: Call to 'realloc' has an allocation size of 0 bytes
+  940 |         char** s = (char**) realloc(d->subfiles, sizeof(char*) * (size_t)(d->num_subfiles));
+      |                             ^                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/renier/Projects/mini-hash/src/fileutils.c:940:30: warning: multilevel pointer conversion from 'char **' to 'void *', please use explicit cast [bugprone-multi-level-implicit-pointer-conversion]
+  940 |         char** s = (char**) realloc(d->subfiles, sizeof(char*) * (size_t)(d->num_subfiles));
+      |                                     ^
+/home/renier/Projects/mini-hash/src/fileutils.c:947:20: warning: multilevel pointer conversion from 'char **' to 'void *', please use explicit cast [bugprone-multi-level-implicit-pointer-conversion]
+  947 |          (char**) realloc(d->subfiles_fullpath, sizeof(char*) * (size_t)(d->num_subfiles));
+      |                           ^
+/home/renier/Projects/mini-hash/src/fileutils.c:1083:35: warning: multilevel pointer conversion from 'char **' to 'void *', please use explicit cast [bugprone-multi-level-implicit-pointer-conversion]
+ 1083 |                                 char** tmp = (char**) realloc(paths, sizeof(char*) * cur_size);
+      |                                                               ^
+/home/renier/Projects/mini-hash/src/fileutils.c:1092:25: warning: Call to 'realloc' has an allocation size of 0 bytes [clang-analyzer-optin.portability.UnixAPI]
+ 1092 |                 char** tmp = (char**) realloc(paths, sizeof(char*) * el_num);
+      |                                       ^
+/home/renier/Projects/mini-hash/src/fileutils.c:782:2: note: Taking false branch
+  782 |         if (fs_identify_path(path) != FS_DIRECTORY) {
+      |         ^
+/home/renier/Projects/mini-hash/src/fileutils.c:787:6: note: Assuming 'd' is not equal to NULL
+  787 |         if (d == NULL) {
+      |             ^~~~~~~~~
+/home/renier/Projects/mini-hash/src/fileutils.c:787:2: note: Taking false branch
+  787 |         if (d == NULL) {
+      |         ^
+/home/renier/Projects/mini-hash/src/fileutils.c:801:2: note: Calling 'd_update_list'
+  801 |         d_update_list(d);
+      |         ^~~~~~~~~~~~~~~~
+/home/renier/Projects/mini-hash/src/fileutils.c:866:18: note: Calling 'fs_list_dir'
+  866 |         char** new_ls = fs_list_dir(d->full_path, &tmp);
+      |                         ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/renier/Projects/mini-hash/src/fileutils.c:502:2: note: Taking false branch
+  502 |         if (fs_identify_path(path) != FS_DIRECTORY) {
+      |         ^
+/home/renier/Projects/mini-hash/src/fileutils.c:505:9: note: Calling '__fs_list_dir'
+  505 |         return __fs_list_dir(path, items);
+      |                ^~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/renier/Projects/mini-hash/src/fileutils.c:1033:6: note: Assuming 'paths' is not equal to NULL
+ 1033 |         if (paths == NULL) {
+      |             ^~~~~~~~~~~~~
+/home/renier/Projects/mini-hash/src/fileutils.c:1033:2: note: Taking false branch
+ 1033 |         if (paths == NULL) {
+      |         ^
+/home/renier/Projects/mini-hash/src/fileutils.c:1069:2: note: 'el_num' initialized to 0
+ 1069 |         int el_num = 0;
+      |         ^~~~~~~~~~
+/home/renier/Projects/mini-hash/src/fileutils.c:1070:6: note: 'd' is null
+ 1070 |         if (d) {
+      |             ^
+/home/renier/Projects/mini-hash/src/fileutils.c:1070:2: note: Taking false branch
+ 1070 |         if (d) {
+      |         ^
+/home/renier/Projects/mini-hash/src/fileutils.c:1091:6: note: 'cur_size' is not equal to 'el_num'
+ 1091 |         if (cur_size != el_num) {
+      |             ^~~~~~~~
+/home/renier/Projects/mini-hash/src/fileutils.c:1091:2: note: Taking true branch
+ 1091 |         if (cur_size != el_num) {
+      |         ^
+/home/renier/Projects/mini-hash/src/fileutils.c:1092:25: note: Call to 'realloc' has an allocation size of 0 bytes
+ 1092 |                 char** tmp = (char**) realloc(paths, sizeof(char*) * el_num);
+      |                                       ^              ~~~~~~~~~~~~~~~~~~~~~~
+/home/renier/Projects/mini-hash/src/fileutils.c:1092:33: warning: multilevel pointer conversion from 'char **' to 'void *', please use explicit cast [bugprone-multi-level-implicit-pointer-conversion]
+ 1092 |                 char** tmp = (char**) realloc(paths, sizeof(char*) * el_num);
+      |                                               ^
+/home/renier/Projects/mini-hash/src/fileutils.c:1096:8: warning: multilevel pointer conversion from 'char **' to 'void *', please use explicit cast [bugprone-multi-level-implicit-pointer-conversion]
+ 1096 |         qsort(paths, (size_t)el_num, sizeof(const char*), __cmp_str);
+      |               ^
+/home/renier/Projects/mini-hash/src/fileutils.c:1107:2: warning: Call to function 'strcpy' is insecure as it does not provide bounding of the memory buffer. Replace unbounded copy functions with analogous functions that support length arguments such as 'strlcpy'. CWE-119 [clang-analyzer-security.insecureAPI.strcpy]
+ 1107 |         strcpy(buf, s);
+      |         ^~~~~~
+/home/renier/Projects/mini-hash/src/fileutils.c:1107:2: note: Call to function 'strcpy' is insecure as it does not provide bounding of the memory buffer. Replace unbounded copy functions with analogous functions that support length arguments such as 'strlcpy'. CWE-119
+ 1107 |         strcpy(buf, s);
+      |         ^~~~~~
+/home/renier/Projects/mini-hash/src/fileutils.c:1163:3: warning: Out of bound access to memory after the end of the heap area [clang-analyzer-security.ArrayBound]
+ 1163 |                 results[cnt++] = loc;
+      |                 ^
+/home/renier/Projects/mini-hash/src/fileutils.c:763:6: note: Assuming field 'buffer' is not equal to NULL
+  763 |         if (f->buffer == NULL) {
+      |             ^~~~~~~~~~~~~~~~~
+/home/renier/Projects/mini-hash/src/fileutils.c:763:2: note: Taking false branch
+  763 |         if (f->buffer == NULL) {
+      |         ^
+/home/renier/Projects/mini-hash/src/fileutils.c:771:15: note: Calling '__str_split_string_any'
+  771 |         char** res = __str_split_string_any(f->buffer, "\n\r\f", &num);
+      |                      ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/renier/Projects/mini-hash/src/fileutils.c:1142:6: note: 's2' is not equal to NULL
+ 1142 |         if (s2 == NULL) {
+      |             ^~
+/home/renier/Projects/mini-hash/src/fileutils.c:1142:2: note: Taking false branch
+ 1142 |         if (s2 == NULL) {
+      |         ^
+/home/renier/Projects/mini-hash/src/fileutils.c:1150:6: note: Assuming 'results' is not equal to NULL
+ 1150 |         if (results == NULL) {
+      |             ^~~~~~~~~~~~~~~
+/home/renier/Projects/mini-hash/src/fileutils.c:1150:2: note: Taking false branch
+ 1150 |         if (results == NULL) {
+      |         ^
+/home/renier/Projects/mini-hash/src/fileutils.c:1157:9: note: Assuming the condition is true
+ 1157 |         while (len != -1) {
+      |                ^~~~~~~~~
+/home/renier/Projects/mini-hash/src/fileutils.c:1157:2: note: Loop condition is true.  Entering loop body
+ 1157 |         while (len != -1) {
+      |         ^
+/home/renier/Projects/mini-hash/src/fileutils.c:1158:7: note: Assuming 'len' is not equal to 0
+ 1158 |                 if (len == 0) {
+      |                     ^~~~~~~~
+/home/renier/Projects/mini-hash/src/fileutils.c:1158:3: note: Taking false branch
+ 1158 |                 if (len == 0) {
+      |                 ^
+/home/renier/Projects/mini-hash/src/fileutils.c:1157:9: note: Assuming the condition is true
+ 1157 |         while (len != -1) {
+      |                ^~~~~~~~~
+/home/renier/Projects/mini-hash/src/fileutils.c:1157:2: note: Loop condition is true.  Entering loop body
+ 1157 |         while (len != -1) {
+      |         ^
+/home/renier/Projects/mini-hash/src/fileutils.c:1158:7: note: Assuming 'len' is not equal to 0
+ 1158 |                 if (len == 0) {
+      |                     ^~~~~~~~
+/home/renier/Projects/mini-hash/src/fileutils.c:1158:3: note: Taking false branch
+ 1158 |                 if (len == 0) {
+      |                 ^
+/home/renier/Projects/mini-hash/src/fileutils.c:1163:3: note: Access of the heap area at index 1, while it holds only a single 'char *' element
+ 1163 |                 results[cnt++] = loc;
+      |                 ^~~~~~~~~~~~~~
+/home/renier/Projects/mini-hash/src/fileutils.c:1169:3: warning: Out of bound access to memory after the end of the heap area [clang-analyzer-security.ArrayBound]
+ 1169 |                 results[cnt++] = loc;
+      |                 ^
+/home/renier/Projects/mini-hash/src/fileutils.c:763:6: note: Assuming field 'buffer' is not equal to NULL
+  763 |         if (f->buffer == NULL) {
+      |             ^~~~~~~~~~~~~~~~~
+/home/renier/Projects/mini-hash/src/fileutils.c:763:2: note: Taking false branch
+  763 |         if (f->buffer == NULL) {
+      |         ^
+/home/renier/Projects/mini-hash/src/fileutils.c:771:15: note: Calling '__str_split_string_any'
+  771 |         char** res = __str_split_string_any(f->buffer, "\n\r\f", &num);
+      |                      ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/renier/Projects/mini-hash/src/fileutils.c:1142:6: note: 's2' is not equal to NULL
+ 1142 |         if (s2 == NULL) {
+      |             ^~
+/home/renier/Projects/mini-hash/src/fileutils.c:1142:2: note: Taking false branch
+ 1142 |         if (s2 == NULL) {
+      |         ^
+/home/renier/Projects/mini-hash/src/fileutils.c:1150:6: note: Assuming 'results' is not equal to NULL
+ 1150 |         if (results == NULL) {
+      |             ^~~~~~~~~~~~~~~
+/home/renier/Projects/mini-hash/src/fileutils.c:1150:2: note: Taking false branch
+ 1150 |         if (results == NULL) {
+      |         ^
+/home/renier/Projects/mini-hash/src/fileutils.c:1157:9: note: Assuming the condition is true
+ 1157 |         while (len != -1) {
+      |                ^~~~~~~~~
+/home/renier/Projects/mini-hash/src/fileutils.c:1157:2: note: Loop condition is true.  Entering loop body
+ 1157 |         while (len != -1) {
+      |         ^
+/home/renier/Projects/mini-hash/src/fileutils.c:1158:7: note: Assuming 'len' is not equal to 0
+ 1158 |                 if (len == 0) {
+      |                     ^~~~~~~~
+/home/renier/Projects/mini-hash/src/fileutils.c:1158:3: note: Taking false branch
+ 1158 |                 if (len == 0) {
+      |                 ^
+/home/renier/Projects/mini-hash/src/fileutils.c:1157:2: note: Loop condition is false. Execution continues on line 1168
+ 1157 |         while (len != -1) {
+      |         ^
+/home/renier/Projects/mini-hash/src/fileutils.c:1168:6: note: Assuming the condition is true
+ 1168 |         if (loc[0] != '\0') {
+      |             ^~~~~~~~~~~~~~
+/home/renier/Projects/mini-hash/src/fileutils.c:1168:2: note: Taking true branch
+ 1168 |         if (loc[0] != '\0') {
+      |         ^
+/home/renier/Projects/mini-hash/src/fileutils.c:1169:3: note: Access of the heap area at index 1, while it holds only a single 'char *' element
+ 1169 |                 results[cnt++] = loc;
+      |                 ^~~~~~~~~~~~~~
+/home/renier/Projects/mini-hash/src/fileutils.c:1173:22: warning: Call to 'realloc' has an allocation size of 0 bytes [clang-analyzer-optin.portability.UnixAPI]
+ 1173 |         char** v = (char**) realloc(results, cnt * sizeof(char*));
+      |                             ^
+/home/renier/Projects/mini-hash/src/fileutils.c:763:6: note: Assuming field 'buffer' is not equal to NULL
+  763 |         if (f->buffer == NULL) {
+      |             ^~~~~~~~~~~~~~~~~
+/home/renier/Projects/mini-hash/src/fileutils.c:763:2: note: Taking false branch
+  763 |         if (f->buffer == NULL) {
+      |         ^
+/home/renier/Projects/mini-hash/src/fileutils.c:771:15: note: Calling '__str_split_string_any'
+  771 |         char** res = __str_split_string_any(f->buffer, "\n\r\f", &num);
+      |                      ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/renier/Projects/mini-hash/src/fileutils.c:1142:6: note: 's2' is not equal to NULL
+ 1142 |         if (s2 == NULL) {
+      |             ^~
+/home/renier/Projects/mini-hash/src/fileutils.c:1142:2: note: Taking false branch
+ 1142 |         if (s2 == NULL) {
+      |         ^
+/home/renier/Projects/mini-hash/src/fileutils.c:1150:6: note: Assuming 'results' is not equal to NULL
+ 1150 |         if (results == NULL) {
+      |             ^~~~~~~~~~~~~~~
+/home/renier/Projects/mini-hash/src/fileutils.c:1150:2: note: Taking false branch
+ 1150 |         if (results == NULL) {
+      |         ^
+/home/renier/Projects/mini-hash/src/fileutils.c:1154:2: note: 'cnt' initialized to 0
+ 1154 |         int cnt = 0;
+      |         ^~~~~~~
+/home/renier/Projects/mini-hash/src/fileutils.c:1157:2: note: Loop condition is false. Execution continues on line 1168
+ 1157 |         while (len != -1) {
+      |         ^
+/home/renier/Projects/mini-hash/src/fileutils.c:1168:6: note: Assuming the condition is false
+ 1168 |         if (loc[0] != '\0') {
+      |             ^~~~~~~~~~~~~~
+/home/renier/Projects/mini-hash/src/fileutils.c:1168:2: note: Taking false branch
+ 1168 |         if (loc[0] != '\0') {
+      |         ^
+/home/renier/Projects/mini-hash/src/fileutils.c:1173:22: note: Call to 'realloc' has an allocation size of 0 bytes
+ 1173 |         char** v = (char**) realloc(results, cnt * sizeof(char*));
+      |                             ^                ~~~~~~~~~~~~~~~~~~~
+/home/renier/Projects/mini-hash/src/fileutils.c:1173:30: warning: multilevel pointer conversion from 'char **' to 'void *', please use explicit cast [bugprone-multi-level-implicit-pointer-conversion]
+ 1173 |         char** v = (char**) realloc(results, cnt * sizeof(char*));
+      |                                     ^
+/home/renier/Projects/mini-hash/src/fileutils.c:1206:7: warning: multilevel pointer conversion from 'char **' to 'void *', please use explicit cast [bugprone-multi-level-implicit-pointer-conversion]
+ 1206 |         free(arr);
+      |              ^
+/home/renier/Projects/mini-hash/src/fileutils.c:1210:46: warning: 2 adjacent parameters of '__parse_file_info' of similar type ('char **') are easily swapped by mistake [bugprone-easily-swappable-parameters]
+ 1210 | __parse_file_info(const char* full_filepath, char** filepath, char** filename)
+      |                                              ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/renier/Projects/mini-hash/src/fileutils.c:1210:53: note: the first parameter in the range is 'filepath'
+ 1210 | __parse_file_info(const char* full_filepath, char** filepath, char** filename)
+      |                                                     ^~~~~~~~
+/home/renier/Projects/mini-hash/src/fileutils.c:1210:70: note: the last parameter in the range is 'filename'
+ 1210 | __parse_file_info(const char* full_filepath, char** filepath, char** filename)
+      |                                                                      ^~~~~~~~
+/home/renier/Projects/mini-hash/src/hashing.c:181:15: warning: 2 adjacent parameters of 'hash_file' of similar type ('const char *') are easily swapped by mistake [bugprone-easily-swappable-parameters]
+  181 | int hash_file(const char* algo, const char* path, unsigned char* out,
+      |               ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/home/renier/Projects/mini-hash/src/hashing.c:181:27: note: the first parameter in the range is 'algo'
+  181 | int hash_file(const char* algo, const char* path, unsigned char* out,
+      |                           ^~~~
+/home/renier/Projects/mini-hash/src/hashing.c:181:45: note: the last parameter in the range is 'path'
+  181 | int hash_file(const char* algo, const char* path, unsigned char* out,
+      |                                             ^~~~
+/home/renier/Projects/mini-hash/src/include/fileutils.h:35:17: warning: declaration uses identifier '__file_struct', which is a reserved identifier [bugprone-reserved-identifier]
+   35 |         typedef struct __file_struct file_struct;
+      |                        ^~~~~~~~~~~~~
+      |                        file_struct
+   36 |         typedef struct __file_struct* file_t;
+      |                        ~~~~~~~~~~~~~
+      |                        file_struct
+/home/renier/Projects/mini-hash/src/include/fileutils.h:38:17: warning: declaration uses identifier '__dir_struct', which is a reserved identifier [bugprone-reserved-identifier]
+   38 |         typedef struct __dir_struct dir_struct;
+      |                        ^~~~~~~~~~~~
+      |                        dir_struct
+   39 |         typedef struct __dir_struct* dir_t;
+      |                        ~~~~~~~~~~~~
+      |                        dir_struct
+/home/renier/Projects/mini-hash/src/include/fileutils.h:42:22: warning: macro replacement list should be enclosed in parentheses [bugprone-macro-parentheses]
+   42 | #define FS_NOT_VALID -10
+      |                      ^  
+      |                      (  )
+/home/renier/Projects/mini-hash/src/include/fileutils.h:43:17: warning: macro replacement list should be enclosed in parentheses [bugprone-macro-parentheses]
+   43 | #define FS_FILE -9
+      |                 ^ 
+      |                 ( )
+/home/renier/Projects/mini-hash/src/include/fileutils.h:44:22: warning: macro replacement list should be enclosed in parentheses [bugprone-macro-parentheses]
+   44 | #define FS_DIRECTORY -8
+      |                      ^ 
+      |                      ( )
+/home/renier/Projects/mini-hash/src/include/fileutils.h:45:20: warning: macro replacement list should be enclosed in parentheses [bugprone-macro-parentheses]
+   45 | #define FS_SYMLINK -7 /* currently not used */
+      |                    ^
+      |                    ( )
+/home/renier/Projects/mini-hash/src/include/fileutils.h:47:22: warning: macro replacement list should be enclosed in parentheses [bugprone-macro-parentheses]
+   47 | #define FS_NOT_EMPTY -6
+      |                      ^ 
+      |                      ( )
+/home/renier/Projects/mini-hash/src/include/fileutils.h:50:22: warning: macro replacement list should be enclosed in parentheses [bugprone-macro-parentheses]
+   50 | #define FS_NO_EXISTS -2
+      |                      ^ 
+      |                      ( )
+/home/renier/Projects/mini-hash/src/include/fileutils.h:53:20: warning: macro replacement list should be enclosed in parentheses [bugprone-macro-parentheses]
+   53 | #define FS_FAILURE -1
+      |                    ^ 
+      |                    ( )
+Running Makefile analysis
+mbake validate --config ./.bake.toml Makefile
+✓ Makefile: Valid syntax

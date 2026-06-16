@@ -1,4 +1,3 @@
-
 # Created by https://www.toptal.com/developers/gitignore/api/rust,python,c,c++
 # Edit at https://www.toptal.com/developers/gitignore?templates=rust,python,c,c++
 
@@ -265,3 +264,4 @@ Cargo.lock
 bin/**
 ./bin/**
 /bin/**
+
